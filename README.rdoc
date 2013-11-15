@@ -1,9 +1,10 @@
 == README
 
-Update Gemfile
-Add Tweets
-User Login Flow
-Following
-Starring
-Make it Pretty
-Super Secret Special Stuff
+To Do:
+  *Update Gemfile
+  *Add Tweets
+  *User Login Flow
+  *Following
+  *Starring
+  *Make it Pretty
+  *Super Secret Special Stuff
