@@ -32,8 +32,15 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+gem 'simple_form'
+gem 'better_errors'
+gem 'binding_of_caller'
+gem 'bootstrap-sass', '>= 3.0.0.0'
+gem 'rails_12factor'
+gem 'pg'
+
 # Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.1.2'
+gem 'bcrypt-ruby', '~> 3.1.2'
 
 # Use unicorn as the app server
 # gem 'unicorn'

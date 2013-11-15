@@ -8,7 +8,37 @@
 </head>
 <body>
 
+
+	<nav class='navbar navbar-default'>
+		<a class='navbar-brand' href='/'>Twitter Clone</a>
+		<ul class='nav navbar-nav'>
+			<li><%= link_to "tweets", tweets_path %></li>
+			<% if current_user %>
+				<li> <%= link_to "profile", user_path(current_user) %> </li> 
+			<% end %>
+		</ul>
+	</nav>
+
+<div class='container'>
+
+<% if current_user %>
+	<%= "you are logged in as #{current_user.username}" %>
+	<%= link_to "Logout", logout_path %>
+<% else %>
+	<%= link_to "login", login_path %> or
+	<%= link_to "Signup", new_user_path %>
+<% end %>		
+
+
+
+<% if flash[:info] %>
+	<div class='alert alert-info'>
+		<%= flash[:info] %>
+	</div>
+<% end %>
 <%= yield %>
+
+</div>
 
 </body>
 </html>

@@ -1,0 +1,46 @@
+<h2> Hi <%= @user.username %> </h2>
+	
+	
+	<% if @user.tweets.count == 0  %>
+		No Tweets
+	<% else %>
+
+
+		<h2> Tweets </h2>
+
+		<ul>
+			<% @user.tweets.each do |tweet| %> 
+			<li> <%= tweet.body  %> </li>
+			<% end %>
+		</ul>
+
+	<% end %>
+
+	<% if @user.followers.count > 0 %>
+		<h3> Followers </h3>
+		<ul>
+			<% @user.followers.each do |follow| %>
+				<li> <%= follow %></li> 
+			<% end %>
+		</ul>
+	<% end %>
+
+	<% if @user.followed_users.count > 0 %>
+		<h3> Following </h3>
+		<ul>
+			<% @user.followed_users.each do |follow| %>
+				<li> <%= follow %></li> 
+			<% end %>
+		</ul>
+	<% end %>
+
+
+<%= simple_form_for @tweet, url: "/tweets", method: :post do |f| %>
+	<%= f.input :body %>
+	<%= f.submit "Tweet", class: 'btn btn-primary' %>
+<% end %>
+
+
+<% if @user.id != session[id] %>
+	<%= link_to "follow", "/users/follow/#{@user.id}" %>
+<% end %>

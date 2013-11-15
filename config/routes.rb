@@ -9,4 +9,5 @@ TwitterClone::Application.routes.draw do
     post "login" => 'sessions#create'
     get "signup" => 'users#new', as: 'signup'
     get 'logout' => 'sessions#destroy', as: 'logout'
+    get '/users/follow/id' => 'users#follow'
 end
