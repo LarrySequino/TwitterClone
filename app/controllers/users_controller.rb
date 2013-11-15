@@ -30,17 +30,27 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 		if @user 
 			@relationship = Relationship.new
-			@relationship.follower = current_user 
-			@relationship.followed_user = @user
+			@relationship.follower_id = current_user.id
+			@relationship.followed_user_id = @user.id
 			if @relationship.save
 				redirect_to user_path(current_user)
 			else
-				redirect_to show_path(current_user)
+				redirect_to root_path
 			end
 		else
 			redirect_to root_path
 		end	
 	end
+
+            def unfollow
+                @relationship = Relationship.where(:followed_user_id => params[:id], :follower_id => session[:user_id])
+                if @relationship.count > 0
+                    Relationship.destroy(@relationship[0].id)
+                    redirect_to user_path(current_user)
+                else
+                    redirect_to root_path
+                end
+            end
 
 	private
 

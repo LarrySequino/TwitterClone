@@ -10,7 +10,11 @@
 
 		<ul>
 			<% @user.tweets.each do |tweet| %> 
-			<li> <%= tweet.body  %> </li>
+			<li> <%= tweet.body  %> (<%= link_to "Fav", "/tweets/favorite/#{tweet.id}" %>) 
+			<% if @user.id != current_user.id %>
+			(<%= link_to "RT", "/tweets/retweet/#{tweet.id}" %>)
+			<% end %>
+			</li>
 			<% end %>
 		</ul>
 
@@ -20,7 +24,7 @@
 		<h3> Followers </h3>
 		<ul>
 			<% @user.followers.each do |follow| %>
-				<li> <%= follow %></li> 
+				<li> <%= link_to follow.username, user_path(follow) %></li> 
 			<% end %>
 		</ul>
 	<% end %>
@@ -29,7 +33,16 @@
 		<h3> Following </h3>
 		<ul>
 			<% @user.followed_users.each do |follow| %>
-				<li> <%= follow %></li> 
+				<li> <%= link_to follow.username, user_path(follow) %> (<%= link_to "Unfollow", "/users/unfollow/#{follow.id}" %>)</li> 
+			<% end %>
+		</ul>
+	<% end %>
+
+	<% if @user.starred_tweets.count > 0 %>
+		<h3>Favorite Tweets</h3>
+		<ul>
+			<% @user.starred_tweets.each do |tweet| %>
+				<li><%= tweet.body %></li>
 			<% end %>
 		</ul>
 	<% end %>
@@ -41,6 +54,6 @@
 <% end %>
 
 
-<% if @user.id != session[id] %>
+<% if @user.id != session[:user_id] %>
 	<%= link_to "follow", "/users/follow/#{@user.id}" %>
 <% end %>
