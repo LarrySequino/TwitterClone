@@ -50,9 +50,22 @@
 	<% if @user.starred_tweets.count > 0 %>
 		<h3>Favorite Tweets</h3>
 		<ul>
-			<% @user.starred_tweets.each do |tweet| %>
-				<li><%= tweet.body %></li>
-			<% end %>
+		            <% @user.starred_tweets.each do |tweet| %> 
+		                <li> 
+		                            <% 
+		                                tweet.body.strip.split.each do |token|
+		                                    if token[0] == '#' %>
+		                                        <%=  link_to "#{token} ", "/hashtags/#{@tags[token]}"%>
+		                                    <% else %>
+		                                        <%= "#{token} " %>
+		                                    <% end %>
+		                                <% end %>
+		                        (<%= link_to "Fav", "/tweets/favorite/#{tweet.id}" %>) 
+		            <% if @user.id != current_user.id %>
+		            	(<%= link_to "RT", "/tweets/retweet/#{tweet.id}" %>)
+		            <% end %>
+		            </li>
+		            <% end %>
 		</ul>
 	<% end %>
 
