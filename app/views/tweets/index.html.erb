@@ -2,8 +2,18 @@
 
 
 <ul>
-	<% @tweets.each do |tweet| %>
-	<li> <%= tweet.body %> </li>
-	<% end %>
-
-</uL>
+                    <% @tweets.each do |tweet| %> 
+                        <li> 
+                                    <% 
+                                        tweet.body.strip.split.each do |token|
+                                            if token[0] == '#' %>
+                                                <%=  link_to "#{token} ", "/hashtags/#{@tags[token]}"%>
+                                            <% else %>
+                                                <%= "#{token} " %>
+                                            <% end %>
+                                        <% end %>
+                                (<%= link_to "Fav", "/tweets/favorite/#{tweet.id}" %>) 
+                        (<%= link_to "RT", "/tweets/retweet/#{tweet.id}" %>)
+                    </li>
+                    <% end %>
+</ul>

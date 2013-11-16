@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
 
 
+            def index
+                @users = User.all
+            end
 	def new
 		@user = User.new
 	end
@@ -23,6 +26,8 @@ class UsersController < ApplicationController
 
 		@user = User.find(params[:id])
 		@tweet = Tweet.new
+                        @tags = Hash.new
+                        hashtags = Hashtag.all.all? { |tag|  @tags[tag.name] = tag.id}
 	end
 
 

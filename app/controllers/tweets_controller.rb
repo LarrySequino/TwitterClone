@@ -3,6 +3,8 @@ class TweetsController < ApplicationController
 
     def index
         @tweets = current_user.followed_users.map(&:tweets).flatten
+        @tags = Hash.new
+        hashtags = Hashtag.all.all? { |tag|  @tags[tag.name] = tag.id}
     end
 
     def create
@@ -13,13 +15,20 @@ class TweetsController < ApplicationController
                         tokens = @tweet.body.strip.split
                         
                         tokens.each do |token|
-                            if token.include? ?#
-                                tag = Hashtag.new
-                                tag.name = token
 
-                                if tag.save
+                            if token[0] == '#' and token.length > 1
+                                tag = Hashtag.find_by_name(token)
+                                if  tag != nil
                                     @tweet.hashtags << tag
+                                else
+                                    tag = Hashtag.new
+                                    tag.name = token
+
+                                    if tag.save
+                                        @tweet.hashtags << tag
+                                    end
                                 end
+                                
                             end
                         end
 
@@ -62,6 +71,13 @@ class TweetsController < ApplicationController
             redirect_to user_path(@tweet.user)
         end
     end
+
+    def hashtag_path(name)
+        tag = Hashtag.find_by_name(name)
+
+        @path = "/hashtags/#{tag.id}"
+    end
+    helper_method :hastag_path
 
     private
         def tweet_params
