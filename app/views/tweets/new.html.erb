@@ -1,7 +1,8 @@
-<h1> New Tweet </h1>
+<div class="page-header">
+    <h1> Tweet <small> Start tweeting now</small></h1>
+</div>
 
-
-<%= simple_form_for @tweet do |f| %>
-	<%= f.input :body %>
-	<%= f.submit %>
+<%= form_for @tweet do |f| %>
+	<%= f.text_area :body %>
+	<%= f.submit "Tweet", class: 'btn btn-primary' %>
 <% end %>

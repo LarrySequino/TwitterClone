@@ -8,18 +8,21 @@
 </head>
 <body>
 
-
+<div class="container">
 	<nav class='navbar navbar-default'>
 		<a class='navbar-brand' href='/'>Twitter Clone</a>
 		<ul class='nav navbar-nav'>
-			<li><%= link_to "tweets", tweets_path %></li>
 			<% if current_user %>
-				<li> <%= link_to "profile", user_path(current_user) %> </li> 
+				<li> <%= link_to "My Profile", user_path(current_user) %> </li> 
 			<% end %>
+			<li><%= link_to "Tweet", new_tweet_path %></li>
+			<li><%= link_to "All Users", users_path %> </li>
 		</ul>
 	</nav>
+</div>
 
 <div class='container'>
+
 
 <% if current_user %>
 	<%= "you are logged in as #{current_user.username}" %>

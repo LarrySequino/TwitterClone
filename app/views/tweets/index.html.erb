@@ -1,19 +1,25 @@
-<h1> Twitter Clone </h1>
+<div class="page-header">
+    <h1> Latest Tweets <small> See what people are saying</small></h1>
+</div>
 
 
 <ul>
-                    <% @tweets.each do |tweet| %> 
-                        <li> 
-                                    <% 
-                                        tweet.body.strip.split.each do |token|
-                                            if token[0] == '#' %>
-                                                <%=  link_to "#{token} ", "/hashtags/#{@tags[token]}"%>
-                                            <% else %>
-                                                <%= "#{token} " %>
-                                            <% end %>
-                                        <% end %>
-                                (<%= link_to "Fav", "/tweets/favorite/#{tweet.id}" %>) 
-                        (<%= link_to "RT", "/tweets/retweet/#{tweet.id}" %>)
-                    </li>
-                    <% end %>
+    <% @tweets.each do |tweet| %> 
+        <li> 
+            <%= tweet.body %>
+                (<%= link_to "Fav", "/tweets/favorite/#{tweet.id}" %>) 
+                (<%= link_to "RT", "/tweets/retweet/#{tweet.id}" %>)
+        </li>
+    <% end %>
 </ul>
+
+
+<% if false %>
+<%= tweet.body.strip.split.each do |token| %>
+    <% if token[0] == '#' %>
+        <%= link_to "#{token} ", "/hashtags/#{@tags[token]}"%>
+    <% else %>
+        <%= "#{token} " %>
+    <% end %>
+<% end %>
+<% end %>

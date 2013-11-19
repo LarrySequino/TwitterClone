@@ -1,4 +1,9 @@
-<h2> Hi <%= @user.username %> </h2>
+ <div class="page-header">
+	<h1><%= @user.username.capitalize %> Tweets <small> See all your tweets
+			<% if @user.id != session[:user_id] %>
+				<%= link_to "follow", "/users/follow/#{@user.id}" %> </small>
+			<% end %> </h1>
+</div>
 	
 	
 	<% if @user.tweets.count == 0  %>
@@ -6,25 +11,24 @@
 	<% else %>
 
 
-		<h2> Tweets </h2>
+	<h2> Tweets </h2>
 
 		<ul>
-		            <% @user.tweets.each do |tweet| %> 
-		                <li> 
-		                            <% 
-		                                tweet.body.strip.split.each do |token|
-		                                    if token[0] == '#' %>
-		                                        <%=  link_to "#{token} ", "/hashtags/#{@tags[token]}"%>
-		                                    <% else %>
-		                                        <%= "#{token} " %>
-		                                    <% end %>
-		                                <% end %>
-		                        (<%= link_to "Fav", "/tweets/favorite/#{tweet.id}" %>) 
-		            <% if @user.id != current_user.id %>
-		            	(<%= link_to "RT", "/tweets/retweet/#{tweet.id}" %>)
-		            <% end %>
-		            </li>
-		            <% end %>
+	        <% @user.tweets.each do |tweet| %> 
+	            <li> 
+                <% tweet.body.strip.split.each do |token| %>
+                    <% if token[0] == '#' %>
+                        <%=  link_to "#{token} ", "/hashtags/#{@tags[token]}"%>
+                    <% else %>
+                        <%= "#{token} " %>
+                    <% end %>
+            	<% end %>
+	        	(<%= link_to "Fav", "/tweets/favorite/#{tweet.id}" %>) 
+		        <% if @user.id != current_user.id %>
+		        	(<%= link_to "RT", "/tweets/retweet/#{tweet.id}" %>)
+		        <% end %>
+	        	</li>
+	        <% end %>
 		</ul>
 
 	<% end %>
@@ -49,33 +53,27 @@
 
 	<% if @user.starred_tweets.count > 0 %>
 		<h3>Favorite Tweets</h3>
-		<ul>
-		            <% @user.starred_tweets.each do |tweet| %> 
-		                <li> 
-		                            <% 
-		                                tweet.body.strip.split.each do |token|
-		                                    if token[0] == '#' %>
-		                                        <%=  link_to "#{token} ", "/hashtags/#{@tags[token]}"%>
-		                                    <% else %>
-		                                        <%= "#{token} " %>
-		                                    <% end %>
-		                                <% end %>
-		                        (<%= link_to "Fav", "/tweets/favorite/#{tweet.id}" %>) 
+			<ul>
+		   		<% @user.starred_tweets.each do |tweet| %> 
+		            <li> 
+		                <% tweet.body.strip.split.each do |token| %>
+		                    <% if token[0] == '#' %>
+		                		<%= link_to "#{token} ", "/hashtags/#{@tags[token]}"%>
+		                    <% else %>
+		                        <%= "#{token} " %>
+		                    <% end %>
+		                <% end %>
+		                (<%= link_to "Fav", "/tweets/favorite/#{tweet.id}" %>) 
 		            <% if @user.id != current_user.id %>
 		            	(<%= link_to "RT", "/tweets/retweet/#{tweet.id}" %>)
 		            <% end %>
 		            </li>
-		            <% end %>
-		</ul>
+		        <% end %>
+			</ul>
 	<% end %>
 
 
-<%= simple_form_for @tweet, url: "/tweets", method: :post do |f| %>
-	<%= f.input :body %>
+<%= form_for @tweet, url: "/tweets", method: :post do |f| %>
+	<%= f.text_area :body %>
 	<%= f.submit "Tweet", class: 'btn btn-primary' %>
-<% end %>
-
-
-<% if @user.id != session[:user_id] %>
-	<%= link_to "follow", "/users/follow/#{@user.id}" %>
 <% end %>
