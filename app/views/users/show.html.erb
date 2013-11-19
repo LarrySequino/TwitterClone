@@ -1,7 +1,11 @@
  <div class="page-header">
 	<h1><%= @user.username.capitalize %> Tweets <small> See all your tweets
 			<% if @user.id != session[:user_id] %>
-				<%= link_to "follow", "/users/follow/#{@user.id}" %> </small>
+				<% if current_user.followed_users.include?(@user) %>
+					<%= link_to "unfollow", "/users/unfollow/#{@user.id}" %>
+				<% else %>
+					<%= link_to "follow", "/users/follow/#{@user.id}" %> </small>
+				<% end %>
 			<% end %> </h1>
 </div>
 	
@@ -40,7 +44,15 @@
 		<h3> Followers </h3>
 		<ul>
 			<% @user.followers.each do |follow| %>
-				<li> <%= link_to follow.username, user_path(follow) %></li> 
+				<li> <%= link_to follow.username, user_path(follow) %>
+					<% if follow.id != session[:user_id] %>
+					<% if current_user.followed_users.include?(follow) %>
+						(<%= link_to "Unfollow", "/users/unfollow/#{follow.id}" %>)
+					<% else %>
+						(<%= link_to "follow", "/users/follow/#{follow.id}" %>) 
+					<% end %>
+					<% end %>
+				</li> 
 			<% end %>
 		</ul>
 	<% end %>
@@ -49,7 +61,15 @@
 		<h3> Following </h3>
 		<ul>
 			<% @user.followed_users.each do |follow| %>
-				<li> <%= link_to follow.username, user_path(follow) %> (<%= link_to "Unfollow", "/users/unfollow/#{follow.id}" %>)</li> 
+				<li> <%= link_to follow.username, user_path(follow) %> 
+					<% if follow.id != session[:user_id] %>
+					<% if current_user.followed_users.include?(follow) %>
+						(<%= link_to "Unfollow", "/users/unfollow/#{follow.id}" %>)
+					<% else %>
+						(<%= link_to "follow", "/users/follow/#{follow.id}" %>) 
+					<% end %>
+					<% end %>
+				</li> 
 			<% end %>
 		</ul>
 	<% end %>
