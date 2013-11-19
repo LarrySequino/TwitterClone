@@ -4,22 +4,21 @@
 
 
 <ul>
-                    <% @tweets.each do |tweet| %> 
-                        <li> 
-                                    <% 
-                                        tweet.body.strip.split.each do |token|
-                                            if token[0] == '#' %>
-                                                <%=  link_to "#{token} ", "/hashtags/#{@tags[token]}"%>
-                                                <% elsif token[0] == '@'%>
-                                                <%=  link_to "#{token} ", "/#{token[1..-1]}" %>
-                                            <% else %>
-                                                <%= "#{token} " %>
-                                            <% end %>
-                                        <% end %>
-                                (<%= link_to "Fav", "/tweets/favorite/#{tweet.id}" %>) 
-                        (<%= link_to "RT", "/tweets/retweet/#{tweet.id}" %>)
-                    </li>
-                    <% end %>
+    <% @tweets.each do |tweet| %> 
+        <li> 
+            <% tweet.body.strip.split.each do |token| %>
+                <% if token[0] == '#' %>
+                    <%=  link_to "#{token} ", "/hashtags/#{@tags[token]}"%>
+                <% elsif token[0] == '@'%>
+                    <%=  link_to "#{token} ", "/#{token[1..-1]}" %>
+                <% else %>
+                    <%= "#{token} " %>
+                <% end %>
+            <% end %>
+                (<%= link_to "Fav", "/tweets/favorite/#{tweet.id}" %>) 
+                (<%= link_to "RT", "/tweets/retweet/#{tweet.id}" %>)
+        </li>
+    <% end %>
 </ul>
 
 <%= form_for @tweet, url: "/tweets", method: :post do |f| %>
