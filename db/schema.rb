@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131115100203) do
+ActiveRecord::Schema.define(version: 20131119081347) do
 
   create_table "hashtags", force: true do |t|
     t.string   "name"
@@ -22,6 +22,13 @@ ActiveRecord::Schema.define(version: 20131115100203) do
   create_table "hashtags_tweets", id: false, force: true do |t|
     t.integer "tweet_id",   null: false
     t.integer "hashtag_id", null: false
+  end
+
+  create_table "mentions", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "tweet_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "relationships", force: true do |t|

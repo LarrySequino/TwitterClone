@@ -8,6 +8,10 @@ class User < ActiveRecord::Base
     has_many :tweets
     has_many :stars
     has_many :starred_tweets, through: :stars, source: :tweet
+
+    has_many :mentions
+    has_many :mention_tweets, through: :mentions, source: :tweet
+
     has_secure_password
 end
 

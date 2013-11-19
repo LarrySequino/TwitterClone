@@ -21,3 +21,8 @@
                     </li>
                     <% end %>
 </ul>
+
+<%= form_for @tweet, url: "/tweets", method: :post do |f| %>
+    <%= f.text_area :body %>
+    <%= f.submit "Tweet", class: 'btn btn-primary' %>
+<% end %>

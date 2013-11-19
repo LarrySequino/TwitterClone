@@ -5,6 +5,8 @@ class TweetsController < ApplicationController
         @tweets = current_user.followed_users.map(&:tweets).flatten
         @tags = Hash.new
         hashtags = Hashtag.all.all? { |tag|  @tags[tag.name] = tag.id}
+
+        @tweet = Tweet.new
     end
 
     def create
@@ -28,7 +30,13 @@ class TweetsController < ApplicationController
                                         @tweet.hashtags << tag
                                     end
                                 end
-                                
+
+                            elsif token[0] == '@' and token.length > 1
+                                user = User.find_by_username(token[1..-1])
+                                mention = Mention.new
+                                mention.user = user
+                                mention.tweet = @tweet
+                                mention.save
                             end
                         end
 
