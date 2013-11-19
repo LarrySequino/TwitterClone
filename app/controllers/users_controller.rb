@@ -26,7 +26,7 @@ class UsersController < ApplicationController
 
 		@user = User.find(params[:id])
                         @tweets = @user.tweets + @user.mention_tweets
-                        @tweets.sort_by {|twt| twt.created_at}
+                        @tweets.sort_by! {|twt| twt.created_at}
 		@tweet = Tweet.new
                         @tags = Hash.new
                         @tagged_users = Hash.new

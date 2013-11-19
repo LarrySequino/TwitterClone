@@ -2,7 +2,9 @@ class TweetsController < ApplicationController
     before_filter :check_login
 
     def index
-        @tweets = current_user.followed_users.map(&:tweets).flatten
+        @tweets = current_user.followed_users.map(&:tweets).flatten + current_user.tweets + current_user.mention_tweets
+        @tweets.uniq!
+        @tweets.sort_by! {|twt| twt.created_at}
         @tags = Hash.new
         hashtags = Hashtag.all.all? { |tag|  @tags[tag.name] = tag.id}
 
