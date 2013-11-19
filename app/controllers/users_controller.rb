@@ -27,8 +27,18 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 		@tweet = Tweet.new
                         @tags = Hash.new
+                        @tagged_users = Hash.new
                         hashtags = Hashtag.all.all? { |tag|  @tags[tag.name] = tag.id}
 	end
+
+            def show_name
+                @user = User.find_by_username(params[:username])
+                if @user != nil
+                    redirect_to "/users/#{@user.id}"
+                else
+                    redirect_to root_path
+                end
+            end
 
 
 	def follow

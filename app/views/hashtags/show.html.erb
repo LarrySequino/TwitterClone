@@ -8,6 +8,8 @@ Tweets:
                                         tweet.body.strip.split.each do |token|
                                             if token[0] == '#' %>
                                                 <%=  link_to "#{token} ", "/hashtags/#{@tags[token]}"%>
+                                                <% elsif token[0] == '@'%>
+                                                <%=  link_to "#{token} ", "/#{token[1..-1]}" %>
                                             <% else %>
                                                 <%= "#{token} " %>
                                             <% end %>

@@ -5,6 +5,7 @@ TwitterClone::Application.routes.draw do
     resources :stars
     root to: 'tweets#index'
 
+    get "/:username" => 'users#show_name'
     get "login" => 'sessions#new', as: 'login'
     post "login" => 'sessions#create'
     get "signup" => 'users#new', as: 'signup'
