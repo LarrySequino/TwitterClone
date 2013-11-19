@@ -69,14 +69,24 @@ class TweetsController < ApplicationController
     end
 
     def retweet
-        @retweet = Tweet.new
+        @retweeted_tweet = Tweet.new
         @tweet = Tweet.find(params[:id])
 
-        @retweet.body = "RT: " + @tweet.body
-        @retweet.user = current_user
+        @retweeted_tweet.body = "RT: " + @tweet.body
+        @retweeted_tweet.user = current_user
 
-        if @retweet.save
-            redirect_to user_path(current_user)
+        if @retweeted_tweet.save
+
+                @retweet = Retweet.new
+                @retweet.tweet = @tweet
+                @retweet.user = current_user
+
+                if @retweet.save
+                    redirect_to user_path(current_user)
+                else
+                    redirect_to root_path
+                end
+
         else
             redirect_to user_path(@tweet.user)
         end

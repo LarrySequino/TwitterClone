@@ -18,6 +18,8 @@
                                         <% end %>
                                 (<%= link_to "Fav", "/tweets/favorite/#{tweet.id}" %>) 
                         (<%= link_to "RT", "/tweets/retweet/#{tweet.id}" %>)
+                        (<%= link_to "View", tweet_path(tweet) %>)
+
                     </li>
                     <% end %>
 </ul>

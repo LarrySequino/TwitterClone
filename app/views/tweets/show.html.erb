@@ -3,3 +3,17 @@
 <%= @tweet.body %>
 </h1>
 <h4>Favorites: <%= @tweet.stars.count %></h4>
+
+<ul>
+<% @tweet.stars.each do |star| %>
+    <li><%= link_to star.user.username, "/#{star.user.username}" %> favorited this</li>
+<% end %>
+</ul>
+
+<h4>Retweets: <%= @tweet.retweets.count %></h4>
+
+<ul>
+<% @tweet.retweets.each do |retweet| %>
+    <li><%= link_to retweet.user.username, "/#{retweet.user.username}" %> retweeted this</li>
+<% end %>
+</ul>

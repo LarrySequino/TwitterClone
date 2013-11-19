@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131119081347) do
+ActiveRecord::Schema.define(version: 20131119173050) do
 
   create_table "hashtags", force: true do |t|
     t.string   "name"
@@ -34,6 +34,13 @@ ActiveRecord::Schema.define(version: 20131119081347) do
   create_table "relationships", force: true do |t|
     t.string   "follower_id"
     t.string   "followed_user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "retweets", force: true do |t|
+    t.integer  "tweet_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
