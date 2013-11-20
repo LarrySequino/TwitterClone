@@ -1,11 +1,11 @@
 <div class="page-header">
-    <h1> Latest Tweets <small> See what people are saying</small></h1>
+    <h1> Latest Twerks <small> See what people are saying</small></h1>
 </div>
 
 
 <ul>
                     <% @tweets.each do |tweet| %> 
-                        <li> <%= link_to tweet.user.username.capitalize, user_path(tweet.user) %> tweeted:
+                        <li> <%= link_to tweet.user.username.capitalize, user_path(tweet.user) %> twerked:
                                     <% 
                                         tweet.body.strip.split.each do |token|
                                             if token[0] == '#' %>
@@ -26,5 +26,5 @@
 
 <%= form_for @tweet, url: "/tweets", method: :post do |f| %>
     <%= f.text_area :body %>
-    <%= f.submit "Tweet", class: 'btn btn-primary' %>
+    <%= f.submit "Twerk", class: 'btn btn-primary' %>
 <% end %>

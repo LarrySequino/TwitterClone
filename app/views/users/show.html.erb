@@ -1,5 +1,5 @@
  <div class="page-header">
-	<h1><%= @user.username.capitalize %> Tweets <small> See all your tweets
+	<h1><%= @user.username.capitalize %> Twerks <small> See all your twerks
 			<% if @user.id != session[:user_id] %>
 				<% if current_user.followed_users.include?(@user) %>
 					<%= link_to "unfollow", "/users/unfollow/#{@user.id}" %>
@@ -11,11 +11,11 @@
 	
 	
 	<% if @user.tweets.count == 0  %>
-		No Tweets
+		No Twerks
 	<% else %>
 
 
-	<h2> Tweets </h2>
+	<h2> Twerks </h2>
 		<ul>
 		            <% @tweets.each do |tweet| %> 
 		                <li> 
@@ -75,7 +75,7 @@
 	<% end %>
 
 	<% if @user.starred_tweets.count > 0 %>
-		<h3>Favorite Tweets</h3>
+		<h3>Favorite Twerks</h3>
 		<ul>
             <% @user.starred_tweets.each do |tweet| %> 
                 <li> 
@@ -101,5 +101,5 @@
 
 <%= form_for @tweet, url: "/tweets", method: :post do |f| %>
 	<%= f.text_area :body %>
-	<%= f.submit "Tweet", class: 'btn btn-primary' %>
+	<%= f.submit "Twerk", class: 'btn btn-primary' %>
 <% end %>

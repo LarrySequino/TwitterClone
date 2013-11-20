@@ -1,5 +1,5 @@
 <h1>
-<%= @tweet.user.username %> Tweets:
+<%= @tweet.user.username %> Twerker:
 <%= @tweet.body %>
 </h1>
 <h4>Favorites: <%= @tweet.stars.count %></h4>
@@ -10,7 +10,7 @@
 <% end %>
 </ul>
 
-<h4>Retweets: <%= @tweet.retweets.count %></h4>
+<h4>Retwerks: <%= @tweet.retweets.count %></h4>
 
 <ul>
 <% @tweet.retweets.each do |retweet| %>
