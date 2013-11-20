@@ -5,7 +5,7 @@
 
 <ul>
                     <% @tweets.each do |tweet| %> 
-                        <li> 
+                        <li> <%= tweet.user.username.capitalize %> tweeted:
                                     <% 
                                         tweet.body.strip.split.each do |token|
                                             if token[0] == '#' %>

@@ -9,6 +9,7 @@ class TweetsController < ApplicationController
         hashtags = Hashtag.all.all? { |tag|  @tags[tag.name] = tag.id}
 
         @tweet = Tweet.new
+        @users = User.all
     end
 
     def create
