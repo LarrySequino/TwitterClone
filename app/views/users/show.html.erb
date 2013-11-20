@@ -24,7 +24,7 @@
 		                                    if token[0] == '#' %>
 		                                        <%=  link_to "#{token} ", "/hashtags/#{@tags[token]}"%>
 		                                    <% elsif token[0] == '@'%>
-		                                        <%=  link_to "#{token} ", "/#{token[1..-1]}" %>
+		                                        <%=  link_to "#{token} ", "/username/#{token[1..-1]}" %>
 		                                    <% else %>
 		                                        <%= "#{token} " %>
 		                                    <% end %>
@@ -83,7 +83,7 @@
                         <% if token[0] == '#' %>
                             <%=  link_to "#{token} ", "/hashtags/#{@tags[token]}"%>
                         <% elsif token[0] == '@'%>
-                            <%=  link_to "#{token} ", "/#{token[1..-1]}" %>
+                            <%=  link_to "#{token} ", "/username/#{token[1..-1]}" %>
                         <% else %>
                             <%= "#{token} " %>
                         <% end %>

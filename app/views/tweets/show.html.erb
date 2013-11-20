@@ -6,7 +6,7 @@
 
 <ul>
 <% @tweet.stars.each do |star| %>
-    <li><%= link_to star.user.username, "/#{star.user.username}" %> favorited this</li>
+    <li><%= link_to star.user.username, "/username/#{star.user.username}" %> favorited this</li>
 <% end %>
 </ul>
 
@@ -14,6 +14,6 @@
 
 <ul>
 <% @tweet.retweets.each do |retweet| %>
-    <li><%= link_to retweet.user.username, "/#{retweet.user.username}" %> retweeted this</li>
+    <li><%= link_to retweet.user.username, "/username/#{retweet.user.username}" %> retweeted this</li>
 <% end %>
 </ul>
